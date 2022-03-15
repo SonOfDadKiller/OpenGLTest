@@ -1,0 +1,12 @@
+﻿  Main.cpp
+C:\Projects\OpenGL\Test\DungeonCrawler\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
+C:\Projects\OpenGL\Test\DungeonCrawler\src\Main.cpp(103,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\Test\DungeonCrawler\src\Main.cpp(104,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\Test\DungeonCrawler\src\Main.cpp(108,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\Test\DungeonCrawler\src\Main.cpp(109,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\Test\DungeonCrawler\src\Main.cpp(110,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\Test\DungeonCrawler\src\Main.cpp(111,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\Test\DungeonCrawler\src\Main.cpp(182,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Texture.cpp
+  Generating Code...
+  DungeonCrawler.vcxproj -> C:\Projects\OpenGL\Test\x64\Debug\DungeonCrawler.exe

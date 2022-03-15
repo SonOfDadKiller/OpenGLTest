@@ -1,0 +1,22 @@
+#version 330 core
+
+//Input from Vert Shader
+in vec4 vertexColor;
+in vec2 texCoord;
+
+//Uniforms
+uniform sampler2D mainTex;
+uniform sampler2D secondTex;
+uniform float time;
+
+//Output
+out vec4 FragColor;
+
+void main()
+{
+	vec2 warp = texCoord + vec2(0, sin((texCoord.x * 40) + time * 5) / 40);
+
+	vec4 mainTexColor = texture(mainTex, warp);
+	vec4 secondTexColor = texture(secondTex, warp);
+	FragColor = mix(mainTexColor, secondTexColor, 0.5 + 0.5 * sin(time / 2)) * vertexColor;
+}
