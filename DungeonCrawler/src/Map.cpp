@@ -200,20 +200,20 @@ void LoadLevel(const char* path)
 	while (it != data.end())
 	{
 		char c = (*it);
-		
-		switch (c)
+
+		if (c == '*')
 		{
-		case '*':
 			tiles[x][y]->isPath = true;
 			x++;
-			break;
-		case '\n':
+		}
+		else if (c == '\n')
+		{
 			y++;
 			x = 0;
-			break;
-		default:
+		}
+		else
+		{
 			x++;
-			break;
 		}
 
 		if (x > MAP_WIDTH)

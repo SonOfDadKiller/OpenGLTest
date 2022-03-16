@@ -14,8 +14,8 @@
 //#define STB_IMAGE_IMPLEMENTATION
 //#include "stb_image.h"
 
-#define WINDOW_WIDTH 1440
-#define WINDOW_HEIGHT 1080
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
 
 void FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
@@ -172,7 +172,7 @@ int main()
 	//Set up camera
 	SetCameraFOV(75.f);
 	SetCameraNearFar(0.1f, 300.f);
-
+	
 	//Default draw settings
 	glEnable(GL_DEPTH_TEST);
 

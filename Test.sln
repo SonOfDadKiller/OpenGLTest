@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test00", "Test00\Test00.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DungeonCrawler", "DungeonCrawler\DungeonCrawler.vcxproj", "{C3A66619-16D8-42BD-8214-B0CE3FCB071D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test01", "Test01\Test01.vcxproj", "{3D0B9864-4940-4601-BDA5-4EF758403D13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{C3A66619-16D8-42BD-8214-B0CE3FCB071D}.Release|x64.Build.0 = Release|x64
 		{C3A66619-16D8-42BD-8214-B0CE3FCB071D}.Release|x86.ActiveCfg = Release|Win32
 		{C3A66619-16D8-42BD-8214-B0CE3FCB071D}.Release|x86.Build.0 = Release|Win32
+		{3D0B9864-4940-4601-BDA5-4EF758403D13}.Debug|x64.ActiveCfg = Debug|x64
+		{3D0B9864-4940-4601-BDA5-4EF758403D13}.Debug|x64.Build.0 = Debug|x64
+		{3D0B9864-4940-4601-BDA5-4EF758403D13}.Debug|x86.ActiveCfg = Debug|Win32
+		{3D0B9864-4940-4601-BDA5-4EF758403D13}.Debug|x86.Build.0 = Debug|Win32
+		{3D0B9864-4940-4601-BDA5-4EF758403D13}.Release|x64.ActiveCfg = Release|x64
+		{3D0B9864-4940-4601-BDA5-4EF758403D13}.Release|x64.Build.0 = Release|x64
+		{3D0B9864-4940-4601-BDA5-4EF758403D13}.Release|x86.ActiveCfg = Release|Win32
+		{3D0B9864-4940-4601-BDA5-4EF758403D13}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
