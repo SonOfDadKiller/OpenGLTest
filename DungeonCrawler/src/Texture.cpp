@@ -31,9 +31,6 @@ unsigned int LoadTexture(const char* path)
 
 	unsigned char* textureData = stbi_load(path, &width, &height, &nrChannels, 0);
 
-
-	
-
 	if (textureData)
 	{
 		//Bind image to texture

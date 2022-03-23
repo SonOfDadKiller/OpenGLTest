@@ -22,7 +22,7 @@ unsigned int LoadTexture(const char* path)
 	//Set parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	//Load texture from file
@@ -30,9 +30,6 @@ unsigned int LoadTexture(const char* path)
 	stbi_set_flip_vertically_on_load(true);
 
 	unsigned char* textureData = stbi_load(path, &width, &height, &nrChannels, 0);
-
-
-	
 
 	if (textureData)
 	{

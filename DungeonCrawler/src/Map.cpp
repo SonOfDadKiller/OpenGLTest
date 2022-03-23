@@ -57,7 +57,6 @@ MapTile::MapTile(int x, int y, float angleDegrees, MapTileType type)
 void InitializeTileVAO(unsigned int cubeVBO, unsigned int& tileVAO, unsigned int indices[], unsigned int indexCount)
 {
 	//Generate and bind VAO
-	unsigned int tileEBO;
 	glGenVertexArrays(1, &tileVAO);
 	glBindVertexArray(tileVAO);
 
@@ -65,6 +64,7 @@ void InitializeTileVAO(unsigned int cubeVBO, unsigned int& tileVAO, unsigned int
 	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
 
 	//Generate, bind and fill EBO
+	unsigned int tileEBO;
 	glGenBuffers(1, &tileEBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, tileEBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount, indices, GL_STATIC_DRAW);
@@ -357,13 +357,13 @@ void LoadLevel(const char* path)
 	}
 }
 
-void DrawTile(vec3 position, float rotation, unsigned int tileEBO, unsigned int elementCount)
+void DrawTile(vec3 position, float rotation, unsigned int tileVAO, unsigned int elementCount)
 {
 	mat4 model = mat4(1.0f);
 	model = glm::translate(model, position);
 	model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.f, 1.f, 0.f));
 	glUniformMatrix4fv(modelMatrixUniform, 1, GL_FALSE, glm::value_ptr(model));
-	glBindVertexArray(tileEBO);
+	glBindVertexArray(tileVAO);
 	glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 0);
 }
 

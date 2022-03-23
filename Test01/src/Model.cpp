@@ -1,2 +1,227 @@
+#include <glad.h>
+#include <glfw3.h>
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/gtx/euler_angles.hpp"
+#include <vector>
+#include <iostream>
+#include "Texture.h"
 #include "Model.h"
+#include "Camera.h"
 
+using std::vector;
+using glm::vec3;
+using glm::vec4;
+using glm::mat4;
+
+static vector<Model> models;
+static vector<ModelInstance> instances;
+static vec3 lightColor;
+static vec3 lightPosition;
+
+unsigned int CreateModel(float vertices[], int vertCount, unsigned int indices[], unsigned int indexCount, const char* texturePath)
+{
+	//Generate and bind VAO
+	unsigned int vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	//Generate, bind and fill VBO
+	unsigned int vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, vertCount, vertices, GL_DYNAMIC_DRAW);
+
+	//Generate, bind and fill EBO
+	unsigned int ebo;
+	glGenBuffers(1, &ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount, indices, GL_STATIC_DRAW);
+
+	//Set up vertex attributes
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0); //position
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float))); //normal
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float))); //uv
+	glEnableVertexAttribArray(2);
+
+	//Unbind buffers
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	//Create modelIndex, load texture and return modelIndex index
+	Model model;
+	model.vao = vao;
+	model.indexCount = indexCount;
+	model.texture = LoadTexture(texturePath);
+	models.push_back(model);
+	return models.size() - 1;
+}
+
+unsigned int CreateModelInstance(unsigned int modelIndex)
+{
+	ModelInstance instance;
+	instance.modelIndex = modelIndex;
+	instance.transform = mat4(1.f);
+	instance.position = vec3(0.f);
+	instance.rotation = vec3(0.f);
+	instance.scale = vec3(1.f);
+	instance.color = vec4(1.f);
+	instances.push_back(instance);
+	return instances.size() - 1;
+}
+
+ModelInstance* GetModelInstance(unsigned int modelInstanceIndex)
+{
+	return &instances[modelInstanceIndex];
+}
+
+void SetModelInstanceShader(unsigned int modelInstanceIndex, unsigned int shaderProgramID)
+{
+#ifdef _DEBUG
+	//Check if model is valid
+	if (modelInstanceIndex < 0 || modelInstanceIndex > instances.size() - 1)
+	{
+		std::cout << "Tried to reference non-existant model instance!!";
+		return;
+	}
+#endif
+
+	//Set shader program
+	instances[modelInstanceIndex].shaderProgram = shaderProgramID;
+
+	//Find uniforms
+	instances[modelInstanceIndex].modelMatrixUniform = glGetUniformLocation(shaderProgramID, "model");
+	instances[modelInstanceIndex].viewMatrixUniform = glGetUniformLocation(shaderProgramID, "view");
+	instances[modelInstanceIndex].projMatrixUniform = glGetUniformLocation(shaderProgramID, "projection");
+	instances[modelInstanceIndex].textureUniform = glGetUniformLocation(shaderProgramID, "main_tex");
+	instances[modelInstanceIndex].colorUniform = glGetUniformLocation(shaderProgramID, "color");
+	instances[modelInstanceIndex].lightColorUniform = glGetUniformLocation(shaderProgramID, "lightColor");
+	instances[modelInstanceIndex].lightPositionUniform = glGetUniformLocation(shaderProgramID, "lightPos");
+	instances[modelInstanceIndex].viewPositionUniform = glGetUniformLocation(shaderProgramID, "viewPos");
+	instances[modelInstanceIndex].timeUniform = glGetUniformLocation(shaderProgramID, "time");
+	instances[modelInstanceIndex].indexUniform = glGetUniformLocation(shaderProgramID, "index");
+}
+
+void RecalculateTransform(ModelInstance* instance)
+{
+	//Calculate transform matrix
+	instance->transform = mat4(1.f);
+	instance->transform = glm::translate(instance->transform, instance->position);
+	instance->transform = glm::scale(instance->transform, instance->scale);
+	instance->transform *= glm::eulerAngleYXZ(instance->rotation.y, instance->rotation.x, instance->rotation.z);
+}
+
+void SetInstancePosition(unsigned int modelInstanceIndex, glm::vec3 position)
+{
+	ModelInstance* instance = GetModelInstance(modelInstanceIndex);
+	instance->position = position;
+	RecalculateTransform(instance);
+}
+
+void SetInstanceRotation(unsigned int modelInstanceIndex, glm::vec3 euler)
+{
+	ModelInstance* instance = GetModelInstance(modelInstanceIndex);
+	instance->rotation = vec3(glm::radians(euler.x), glm::radians(euler.y), glm::radians(euler.z));
+	RecalculateTransform(instance);
+}
+
+void SetInstanceScale(unsigned int modelInstanceIndex, glm::vec3 scale)
+{
+	ModelInstance* instance = GetModelInstance(modelInstanceIndex);
+	instance->scale = scale;
+	RecalculateTransform(instance);
+}
+
+glm::vec3 GetInstancePosition(unsigned int modelInstanceIndex)
+{
+	return GetModelInstance(modelInstanceIndex)->position;
+}
+
+glm::vec3 GetInstanceRotation(unsigned int modelInstanceIndex)
+{
+	return GetModelInstance(modelInstanceIndex)->rotation;
+}
+
+glm::vec3 GetInstanceScale(unsigned int modelInstanceIndex)
+{
+	return GetModelInstance(modelInstanceIndex)->scale;
+}
+
+void SetModelInstanceColor(unsigned int modelInstanceIndex, vec3 color)
+{
+	instances[modelInstanceIndex].color = color;
+}
+
+void SetLightColor(vec3 color)
+{
+	lightColor = color;
+}
+
+void SetLightPosition(vec3 position)
+{
+	lightPosition = position;
+}
+
+void DrawModelInstances()
+{
+	float time = glfwGetTime();
+	
+
+	for (auto it = instances.begin(); it != instances.end(); it++)
+	{
+		glUseProgram(it->shaderProgram);
+
+		if (it->colorUniform != -1)
+		{
+			glUniform3f(it->colorUniform, it->color.x, it->color.y, it->color.z);
+		}
+
+		if (it->lightColorUniform != -1)
+		{
+			glUniform3f(it->lightColorUniform, lightColor.x, lightColor.y, lightColor.z);
+		}
+
+		if (it->lightPositionUniform != -1)
+		{
+			glUniform3f(it->lightPositionUniform, lightPosition.x, lightPosition.y, lightPosition.z);
+		}
+
+		if (it->viewPositionUniform != -1)
+		{
+			vec3 camPos = GetCameraPosition();
+			glUniform3f(it->viewPositionUniform, camPos.x, camPos.y, camPos.z);
+		}
+		
+		if (it->textureUniform != -1)
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glUniform1i(it->textureUniform, 0);
+		}
+
+		if (it->timeUniform != -1)
+		{
+			glUniform1f(it->timeUniform, time);
+		}
+
+		if (it->indexUniform != -1)
+		{
+			glUniform1i(it->indexUniform, it - instances.begin());
+		}
+
+		glBindTexture(GL_TEXTURE_2D, models[it->modelIndex].texture);
+
+		//Set view and projection matrices
+		glUniformMatrix4fv(it->viewMatrixUniform, 1, GL_FALSE, glm::value_ptr(GetCameraView()));
+		glUniformMatrix4fv(it->projMatrixUniform, 1, GL_FALSE, glm::value_ptr(GetCameraProjection()));
+
+		//Bind and draw
+		glUniformMatrix4fv(it->modelMatrixUniform, 1, GL_FALSE, glm::value_ptr(it->transform));
+		glBindVertexArray(models[it->modelIndex].vao);
+		glDrawElements(GL_TRIANGLES, models[it->modelIndex].indexCount, GL_UNSIGNED_INT, 0);
+	}
+
+	//Unbind
+	glBindVertexArray(0);
+}

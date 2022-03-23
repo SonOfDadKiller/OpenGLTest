@@ -1,12 +1,18 @@
-﻿  Main.cpp
-C:\Projects\OpenGL\Test\Test00\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(168,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(169,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(173,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(174,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(175,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(176,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(589,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(610,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\Test\Test00\src\Main.cpp(611,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Test00.vcxproj -> C:\Projects\OpenGL\Test\x64\Debug\Test00.exe
+﻿  glad.c
+  Camera.cpp
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
+  Main.cpp
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(168,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(169,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(173,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(174,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(175,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(176,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(589,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(610,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(611,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Shader.cpp
+  Generating Code...
+     Creating library C:\Projects\OpenGL\OpenGLTest\x64\Debug\Test00.lib and object C:\Projects\OpenGL\OpenGLTest\x64\Debug\Test00.exp
+  Test00.vcxproj -> C:\Projects\OpenGL\OpenGLTest\x64\Debug\Test00.exe

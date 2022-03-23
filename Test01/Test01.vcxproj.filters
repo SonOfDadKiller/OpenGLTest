@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{b4eec046-2096-4a5a-a848-8632bd41d950}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -53,5 +56,25 @@
     <ClInclude Include="src\Model.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\color.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\color.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_gouraud.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_phong.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_phong.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_gouraud.frag">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
