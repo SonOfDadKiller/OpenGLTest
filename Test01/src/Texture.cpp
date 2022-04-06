@@ -31,11 +31,15 @@ unsigned int LoadTexture(const char* path)
 
 	unsigned char* textureData = stbi_load(path, &width, &height, &nrChannels, 0);
 
+	std::cout << "Load Texture @" << path << "	nrChannels = " << nrChannels;
+
+	unsigned int imageFormat = nrChannels == 4 ? GL_RGBA : GL_RGB;
+
 	if (textureData)
 	{
 		//Bind image to texture
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, imageFormat, GL_UNSIGNED_BYTE, textureData);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else

@@ -1,10 +1,10 @@
 ﻿  Main.cpp
-C:\Projects\OpenGL\OpenGLTest\Test01\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
-C:\Projects\OpenGL\OpenGLTest\Test01\src\Main.cpp(82,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test01\src\Main.cpp(83,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test01\src\Main.cpp(87,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test01\src\Main.cpp(88,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test01\src\Main.cpp(89,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test01\src\Main.cpp(90,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test01\src\Main.cpp(194,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Test01.vcxproj -> C:\Projects\OpenGL\OpenGLTest\x64\Debug\Test01.exe
+C:\Projects\OpenGLTest\Test01\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
+C:\Projects\OpenGLTest\Test01\src\Main.cpp(82,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test01\src\Main.cpp(83,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test01\src\Main.cpp(87,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test01\src\Main.cpp(88,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test01\src\Main.cpp(89,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test01\src\Main.cpp(90,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test01\src\Main.cpp(221,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Test01.vcxproj -> C:\Projects\OpenGLTest\x64\Debug\Test01.exe

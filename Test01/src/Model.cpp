@@ -15,10 +15,13 @@ using glm::mat4;
 
 static vector<Model> models;
 static vector<ModelInstance> instances;
-static vec3 lightColor;
+static vec3 lightAmbient;
+static vec3 lightDiffuse;
+static vec3 lightSpecular;
 static vec3 lightPosition;
+static vec3 lightDirection;
 
-unsigned int CreateModel(float vertices[], int vertCount, unsigned int indices[], unsigned int indexCount, const char* texturePath)
+unsigned int CreateModel(float vertices[], int vertCount, unsigned int indices[], unsigned int indexCount, const char* texturePath, const char* specMapPath)
 {
 	//Generate and bind VAO
 	unsigned int vao;
@@ -55,6 +58,7 @@ unsigned int CreateModel(float vertices[], int vertCount, unsigned int indices[]
 	model.vao = vao;
 	model.indexCount = indexCount;
 	model.texture = LoadTexture(texturePath);
+	model.specMap = LoadTexture(specMapPath);
 	models.push_back(model);
 	return models.size() - 1;
 }
@@ -83,7 +87,7 @@ void SetModelInstanceShader(unsigned int modelInstanceIndex, unsigned int shader
 	//Check if model is valid
 	if (modelInstanceIndex < 0 || modelInstanceIndex > instances.size() - 1)
 	{
-		std::cout << "Tried to reference non-existant model instance!!";
+		std::cout << "Tried to reference non-existent model instance!!";
 		return;
 	}
 #endif
@@ -102,6 +106,19 @@ void SetModelInstanceShader(unsigned int modelInstanceIndex, unsigned int shader
 	instances[modelInstanceIndex].viewPositionUniform = glGetUniformLocation(shaderProgramID, "viewPos");
 	instances[modelInstanceIndex].timeUniform = glGetUniformLocation(shaderProgramID, "time");
 	instances[modelInstanceIndex].indexUniform = glGetUniformLocation(shaderProgramID, "index");
+
+	instances[modelInstanceIndex].ambientUniform = glGetUniformLocation(shaderProgramID, "material.ambient");
+	instances[modelInstanceIndex].diffuseUniform = glGetUniformLocation(shaderProgramID, "material.diffuse");
+	instances[modelInstanceIndex].specularUniform = glGetUniformLocation(shaderProgramID, "material.specular");
+	instances[modelInstanceIndex].shininessUniform = glGetUniformLocation(shaderProgramID, "material.shininess");
+	instances[modelInstanceIndex].diffuseMapUniform = glGetUniformLocation(shaderProgramID, "material.diffuseMap");
+	instances[modelInstanceIndex].specularMapUniform = glGetUniformLocation(shaderProgramID, "material.specularMap");
+
+	instances[modelInstanceIndex].lightAmbientUniform = glGetUniformLocation(shaderProgramID, "light.ambient");
+	instances[modelInstanceIndex].lightDiffuseUniform = glGetUniformLocation(shaderProgramID, "light.diffuse");
+	instances[modelInstanceIndex].lightSpecularUniform = glGetUniformLocation(shaderProgramID, "light.specular");
+
+	instances[modelInstanceIndex].lightDirectionUniform = glGetUniformLocation(shaderProgramID, "light.direction");
 }
 
 void RecalculateTransform(ModelInstance* instance)
@@ -154,9 +171,19 @@ void SetModelInstanceColor(unsigned int modelInstanceIndex, vec3 color)
 	instances[modelInstanceIndex].color = color;
 }
 
-void SetLightColor(vec3 color)
+void SetLightAmbientColor(vec3 color)
 {
-	lightColor = color;
+	lightAmbient = color;
+}
+
+void SetLightDiffuseColor(vec3 color)
+{
+	lightDiffuse = color;
+}
+
+void SetLightSpecularColor(vec3 color)
+{
+	lightSpecular = color;
 }
 
 void SetLightPosition(vec3 position)
@@ -164,10 +191,14 @@ void SetLightPosition(vec3 position)
 	lightPosition = position;
 }
 
+void SetLightDirection(vec3 direction)
+{
+	lightDirection = direction;
+}
+
 void DrawModelInstances()
 {
 	float time = glfwGetTime();
-	
 
 	for (auto it = instances.begin(); it != instances.end(); it++)
 	{
@@ -180,12 +211,17 @@ void DrawModelInstances()
 
 		if (it->lightColorUniform != -1)
 		{
-			glUniform3f(it->lightColorUniform, lightColor.x, lightColor.y, lightColor.z);
+			glUniform3f(it->lightColorUniform, lightDiffuse.x, lightDiffuse.y, lightDiffuse.z);
 		}
 
 		if (it->lightPositionUniform != -1)
 		{
 			glUniform3f(it->lightPositionUniform, lightPosition.x, lightPosition.y, lightPosition.z);
+		}
+
+		if (it->lightDirectionUniform != -1)
+		{
+			glUniform3f(it->lightDirectionUniform, lightDirection.x, lightDirection.y, lightDirection.z);
 		}
 
 		if (it->viewPositionUniform != -1)
@@ -197,6 +233,7 @@ void DrawModelInstances()
 		if (it->textureUniform != -1)
 		{
 			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, models[it->modelIndex].texture);
 			glUniform1i(it->textureUniform, 0);
 		}
 
@@ -210,7 +247,57 @@ void DrawModelInstances()
 			glUniform1i(it->indexUniform, it - instances.begin());
 		}
 
-		glBindTexture(GL_TEXTURE_2D, models[it->modelIndex].texture);
+		if (it->ambientUniform != -1)
+		{
+			glUniform3f(it->ambientUniform, it->ambient.x, it->ambient.y, it->ambient.z);
+		}
+
+		if (it->diffuseUniform != -1)
+		{
+			glUniform3f(it->diffuseUniform, it->diffuse.x, it->diffuse.y, it->diffuse.z);
+		}
+
+		if (it->specularUniform != -1)
+		{
+			glUniform3f(it->specularUniform, it->specular.x, it->specular.y, it->specular.z);
+		}
+
+		if (it->shininessUniform != -1)
+		{
+			glUniform1f(it->shininessUniform, it->shininess);
+		}
+
+		if (it->diffuseMapUniform != -1)
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, models[it->modelIndex].texture);
+			glUniform1i(it->diffuseMapUniform, 0);
+		}
+
+		if (it->specularMapUniform != -1)
+		{
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, models[it->modelIndex].specMap);
+			glUniform1i(it->specularMapUniform, 1);
+		}
+
+		if (it->lightAmbientUniform != -1)
+		{
+			glUniform3f(it->lightAmbientUniform, lightAmbient.x, lightAmbient.y, lightAmbient.z);
+		}
+
+		if (it->lightDiffuseUniform != -1)
+		{
+			glUniform3f(it->lightDiffuseUniform, lightDiffuse.x, lightDiffuse.y, lightDiffuse.z);
+		}
+
+		if (it->lightSpecularUniform != -1)
+		{
+			glUniform3f(it->lightSpecularUniform, lightSpecular.x, lightSpecular.y, lightSpecular.z);
+		}
+		
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, models[it->modelIndex].texture);
 
 		//Set view and projection matrices
 		glUniformMatrix4fv(it->viewMatrixUniform, 1, GL_FALSE, glm::value_ptr(GetCameraView()));

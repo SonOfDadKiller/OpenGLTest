@@ -74,6 +74,21 @@
     <LibraryPath>$(SolutionDir)3rdParty\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SolutionDir)3rdParty\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)3rdParty\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)3rdParty\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SolutionDir)3rdParty\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)3rdParty\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)3rdParty\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SolutionDir)3rdParty\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)3rdParty\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)3rdParty\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SolutionDir)3rdParty\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -94,9 +109,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -112,6 +130,8 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,6 +147,8 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -150,6 +172,12 @@
     <None Include="shaders\color.vert" />
     <None Include="shaders\tex_gouraud.frag" />
     <None Include="shaders\tex_gouraud.vert" />
+    <None Include="shaders\tex_material.frag" />
+    <None Include="shaders\tex_material.vert" />
+    <None Include="shaders\tex_material_map.frag" />
+    <None Include="shaders\tex_material_map.vert" />
+    <None Include="shaders\tex_material_map_directional.frag" />
+    <None Include="shaders\tex_material_map_directional.vert" />
     <None Include="shaders\tex_phong.frag" />
     <None Include="shaders\tex_phong.vert" />
   </ItemGroup>

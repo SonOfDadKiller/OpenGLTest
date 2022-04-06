@@ -124,6 +124,11 @@ unsigned int CreateShaderProgram(unsigned int vertShaderID, unsigned int fragSha
 	return programID;
 }
 
+unsigned int CreateShaderProgram(const char* vertShaderPath, const char* fragShaderPath)
+{
+	return CreateShaderProgram(CreateShader(Vertex, vertShaderPath), CreateShader(Fragment, fragShaderPath));
+}
+
 void CleanupShaders()
 {
 	for (int i : vertShaders)

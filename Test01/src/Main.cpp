@@ -152,40 +152,67 @@ int main()
 	SetCameraNearFar(0.01f, 300.f);
 
 	//Load shaders
-	unsigned int colorVertShader = CreateShader(Vertex, "shaders/color.vert");
-	unsigned int colorFragShader = CreateShader(Fragment, "shaders/color.frag");
-	unsigned int colorShader = CreateShaderProgram(colorVertShader, colorFragShader);
-
-	unsigned int texPhongVert = CreateShader(Vertex, "shaders/tex_phong.vert");
-	unsigned int texPhongFrag = CreateShader(Fragment, "shaders/tex_phong.frag");
-	unsigned int phongShader = CreateShaderProgram(texPhongVert, texPhongFrag);
-
-	unsigned int texGouraudVert = CreateShader(Vertex, "shaders/tex_gouraud.vert");
-	unsigned int texGouraudFrag = CreateShader(Fragment, "shaders/tex_gouraud.frag");
-	unsigned int gouraudShader = CreateShaderProgram(texGouraudVert, texGouraudFrag);
+	unsigned int colorShader = CreateShaderProgram("shaders/color.vert", "shaders/color.frag");
+	unsigned int phongShader = CreateShaderProgram("shaders/tex_phong.vert", "shaders/tex_phong.frag");
+	unsigned int gouraudShader = CreateShaderProgram("shaders/tex_gouraud.vert", "shaders/tex_gouraud.frag");
+	unsigned int materialShader = CreateShaderProgram("shaders/tex_material.vert", "shaders/tex_material.frag");
+	unsigned int materialMapShader = CreateShaderProgram("shaders/tex_material_map.vert", "shaders/tex_material_map.frag");
+	unsigned int materialMapDirectionalShader = CreateShaderProgram("shaders/tex_material_map_directional.vert", "shaders/tex_material_map_directional.frag");
 	
 	//Default draw settings
 	glEnable(GL_DEPTH_TEST);
 
 	//Load models
-	unsigned int cube = CreateModel(cubeVerts, sizeof(cubeVerts), cubeIndices, sizeof(cubeIndices), "textures/wood_new_lowres_00.png");
+	unsigned int cube = CreateModel(cubeVerts, sizeof(cubeVerts), cubeIndices, sizeof(cubeIndices), "textures/container2.png", "textures/container2_specular.png");
+
+	//lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+	//lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f); // darken diffuse light a bit
+	//lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
 	//Set up light
 	unsigned int light = CreateModelInstance(cube);
 	vec3 lightPosition(1.2f, 1.0f, 2.0f);
-	vec3 lightColor(1.f, 1.f, 1.f);
-	SetLightColor(lightColor);
+	vec3 lightColor(0.5f);
+	SetLightDiffuseColor(lightColor);
+	SetLightAmbientColor(vec3(0.2f));
+	SetLightSpecularColor(vec3(1.f, 0.f, 0.f));
 	SetLightPosition(lightPosition);
+	SetLightDirection(vec3(0.2f, -0.2f, 0.6f));
 	SetModelInstanceShader(light, colorShader);
 	SetModelInstanceColor(light, lightColor);
 
 	SetInstancePosition(light, lightPosition);
-	SetInstanceScale(light, vec3(0.2f, 0.2f, 0.2f));
+	SetInstanceScale(light, vec3(0.2f, 0.2f, 0.2f) * 0.f);
+
+	/*	lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+		lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+		lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+		lightingShader.setFloat("material.shininess", 32.0f);*/
 
 	//Set up cube
-	unsigned int cubeInstance = CreateModelInstance(cube);
-	SetModelInstanceShader(cubeInstance, gouraudShader);
-	SetModelInstanceColor(cubeInstance, vec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+
+	std::vector<unsigned int> cubes;
+
+	for (int x = 0; x < 4; x++)
+	{
+		for (int y = 0; y < 4; y++)
+		{
+			for (int z = 0; z < 4; z++)
+			{
+				unsigned int cubeInstance = CreateModelInstance(cube);
+				SetModelInstanceShader(cubeInstance, materialMapDirectionalShader);
+				SetInstancePosition(cubeInstance, vec3(x, y, z) * 2.f);
+				//SetModelInstanceColor(cubeInstance, vec4(1.0f, 1.0f, 1.0f, 1.0f));
+				ModelInstance* p_cubeInstance = GetModelInstance(cubeInstance);
+				p_cubeInstance->ambient = vec3(1.f, 0.5f, 0.31f);
+				//p_cubeInstance->diffuse = vec3(1.f, 0.5f, 0.31f);
+				p_cubeInstance->specular = vec3(0.1f);
+				p_cubeInstance->shininess = 8.f;
+				cubes.push_back(cubeInstance);
+			}
+		}
+	}
 
 	//Update loop
 	while (!glfwWindowShouldClose(window))
@@ -199,11 +226,20 @@ int main()
 		ProcessInput(window, deltaTime);
 		lightPosition = vec3(sin(time) * 1.3f, sin(time * 0.5f), cos(time) * 1.3f);
 		SetInstancePosition(light, lightPosition);
-		SetInstanceRotation(cubeInstance, vec3(time * 15.f, sin(time * 0.5f) * 90.f, time * 10.f));
 		SetLightPosition(lightPosition);
-		vec3 lightColor = glm::rgbColor(vec3(128.f + sin(time / 5.f) * 128.f, 1.f, 1.f));
-		SetLightColor(lightColor);
-		SetModelInstanceColor(light, lightColor);
+		//vec3 lightColor = glm::rgbColor(vec3(128.f + sin(time / 5.f) * 128.f, 1.f, 1.f));
+		//SetLightColor(lightColor);
+		//SetModelInstanceColor(light, lightColor);
+
+		//Rotate cubes
+		auto it = cubes.begin();
+
+		while (it != cubes.end())
+		{
+			SetInstanceRotation(*it, vec3(time * 15.f, sin(time * 0.5f) * 90.f, time * 10.f));
+			it++;
+		}
+		
 
 		//Clear
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

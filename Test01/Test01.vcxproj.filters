@@ -76,5 +76,23 @@
     <None Include="shaders\tex_gouraud.frag">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="shaders\tex_material.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map_directional.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map_directional.frag">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

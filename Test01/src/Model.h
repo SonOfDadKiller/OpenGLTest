@@ -5,6 +5,7 @@ struct Model
 	unsigned int vao;
 	unsigned int indexCount;
 	unsigned int texture;
+	unsigned int specMap;
 };
 
 struct ModelInstance
@@ -23,6 +24,18 @@ struct ModelInstance
 	unsigned int viewPositionUniform = -1;
 	unsigned int timeUniform = -1;
 	unsigned int indexUniform = -1;
+	unsigned int ambientUniform = -1;
+	unsigned int diffuseUniform = -1;
+	unsigned int specularUniform = -1;
+	unsigned int shininessUniform = -1;
+	unsigned int diffuseMapUniform = -1;
+	unsigned int specularMapUniform = -1;
+
+	unsigned int lightAmbientUniform = -1;
+	unsigned int lightDiffuseUniform = -1;
+	unsigned int lightSpecularUniform = -1;
+
+	unsigned int lightDirectionUniform = -1;
 
 	glm::vec3 position;
 	glm::vec3 rotation;
@@ -30,10 +43,14 @@ struct ModelInstance
 
 	glm::mat4 transform;
 	glm::vec3 color;
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+	float shininess;
 };
 
 
-unsigned int CreateModel(float vertices[], int vertCount, unsigned int indices[], unsigned int indexCount, const char* texturePath);
+unsigned int CreateModel(float vertices[], int vertCount, unsigned int indices[], unsigned int indexCount, const char* texturePath, const char* specMapPath);
 unsigned int CreateModelInstance(unsigned int modelIndex);
 ModelInstance* GetModelInstance(unsigned int modelInstanceIndex);
 void SetModelInstanceShader(unsigned int modelInstanceIndex, unsigned int shaderProgramID);
@@ -47,8 +64,11 @@ glm::vec3 GetInstanceRotation(unsigned int modelInstanceIndex);
 glm::vec3 GetInstanceScale(unsigned int modelInstanceIndex);
 
 void SetModelInstanceColor(unsigned int modelInstanceIndex, glm::vec3 color);
-void SetLightColor(glm::vec3 color);
 void SetLightPosition(glm::vec3 position);
+void SetLightDirection(glm::vec3 direction);
+void SetLightAmbientColor(glm::vec3 color);
+void SetLightDiffuseColor(glm::vec3 color);
+void SetLightSpecularColor(glm::vec3 color);
 
 void DrawModelInstances();
 
