@@ -1,0 +1,12 @@
+﻿  Main.cpp
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(84,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(85,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(89,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(90,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(91,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(92,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(183,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Model.cpp
+C:\Projects\OpenGLTest\Test02\src\Model.cpp(91,68): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  Generating Code...
+  Test02.vcxproj -> C:\Projects\OpenGLTest\x64\Debug\Test02.exe

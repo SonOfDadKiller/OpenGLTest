@@ -1,9 +1,1 @@
-﻿  Main.cpp
-D:\Projects\OpenGL\OpenGLTest\DungeonCrawler\src\Main.cpp(103,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Projects\OpenGL\OpenGLTest\DungeonCrawler\src\Main.cpp(104,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Projects\OpenGL\OpenGLTest\DungeonCrawler\src\Main.cpp(108,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Projects\OpenGL\OpenGLTest\DungeonCrawler\src\Main.cpp(109,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Projects\OpenGL\OpenGLTest\DungeonCrawler\src\Main.cpp(110,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Projects\OpenGL\OpenGLTest\DungeonCrawler\src\Main.cpp(111,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Projects\OpenGL\OpenGLTest\DungeonCrawler\src\Main.cpp(182,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  DungeonCrawler.vcxproj -> D:\Projects\OpenGL\OpenGLTest\x64\Debug\DungeonCrawler.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(439,5): error MSB8020: The build tools for v143 (Platform Toolset = 'v143') cannot be found. To build using the v143 build tools, please install v143 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Retarget solution".

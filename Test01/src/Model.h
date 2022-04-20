@@ -36,6 +36,12 @@ struct ModelInstance
 	unsigned int lightSpecularUniform = -1;
 
 	unsigned int lightDirectionUniform = -1;
+	unsigned int lightCutoffUniform = -1;
+	unsigned int lightCutoffInnerUniform = -1;
+
+	unsigned int lightAttenConstantUniform = -1;
+	unsigned int lightAttenLinearUniform = -1;
+	unsigned int lightAttenQuadraticUniform = -1;
 
 	glm::vec3 position;
 	glm::vec3 rotation;
@@ -58,17 +64,20 @@ void SetModelInstanceShader(unsigned int modelInstanceIndex, unsigned int shader
 void SetInstancePosition(unsigned int modelInstanceIndex, glm::vec3 position);
 void SetInstanceRotation(unsigned int modelInstanceIndex, glm::vec3 euler);
 void SetInstanceScale(unsigned int modelInstanceIndex, glm::vec3 scale);
+void SetInstanceColor(unsigned int modelInstanceIndex, glm::vec3 color);
 
 glm::vec3 GetInstancePosition(unsigned int modelInstanceIndex);
 glm::vec3 GetInstanceRotation(unsigned int modelInstanceIndex);
 glm::vec3 GetInstanceScale(unsigned int modelInstanceIndex);
 
-void SetModelInstanceColor(unsigned int modelInstanceIndex, glm::vec3 color);
 void SetLightPosition(glm::vec3 position);
 void SetLightDirection(glm::vec3 direction);
 void SetLightAmbientColor(glm::vec3 color);
 void SetLightDiffuseColor(glm::vec3 color);
 void SetLightSpecularColor(glm::vec3 color);
+void SetLightAttenuation(float constant, float linear, float quadratic);
+void SetLightCutoffOuter(float angle);
+void SetLightCutoffInner(float angle);
 
 void DrawModelInstances();
 

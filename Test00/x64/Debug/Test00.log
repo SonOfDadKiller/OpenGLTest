@@ -1,18 +1,33 @@
 ﻿  glad.c
   Camera.cpp
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
+C:\Projects\OpenGLTest\Test00\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
   Main.cpp
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(168,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(169,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(173,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(174,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(175,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(176,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(589,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(610,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Projects\OpenGL\OpenGLTest\Test00\src\Main.cpp(611,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Camera.h(1,13): warning C4081: expected 'newline'; found ';'
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(168,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(169,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(173,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(174,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(175,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(176,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(589,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(610,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test00\src\Main.cpp(611,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Shader.cpp
   Generating Code...
-     Creating library C:\Projects\OpenGL\OpenGLTest\x64\Debug\Test00.lib and object C:\Projects\OpenGL\OpenGLTest\x64\Debug\Test00.exp
-  Test00.vcxproj -> C:\Projects\OpenGL\OpenGLTest\x64\Debug\Test00.exe
+     Creating library C:\Projects\OpenGLTest\x64\Debug\Test00.lib and object C:\Projects\OpenGLTest\x64\Debug\Test00.exp
+glfw3.lib(context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(context.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(init.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(input.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(monitor.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(vulkan.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(vulkan.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(window.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_init.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_joystick.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_monitor.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_time.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_thread.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_thread.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_window.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(wgl_context.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(egl_context.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(osmesa_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(osmesa_context.obj)' or at 'C:\Projects\OpenGLTest\x64\Debug\glfw.pdb'; linking object as if no debug info
+  Test00.vcxproj -> C:\Projects\OpenGLTest\x64\Debug\Test00.exe

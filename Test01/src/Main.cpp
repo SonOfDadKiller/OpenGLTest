@@ -158,7 +158,11 @@ int main()
 	unsigned int materialShader = CreateShaderProgram("shaders/tex_material.vert", "shaders/tex_material.frag");
 	unsigned int materialMapShader = CreateShaderProgram("shaders/tex_material_map.vert", "shaders/tex_material_map.frag");
 	unsigned int materialMapDirectionalShader = CreateShaderProgram("shaders/tex_material_map_directional.vert", "shaders/tex_material_map_directional.frag");
-	
+	unsigned int materialMapPointShader = CreateShaderProgram("shaders/tex_material_map_point.vert", "shaders/tex_material_map_point.frag");
+	unsigned int materialMapSpotShader = CreateShaderProgram("shaders/tex_material_map_spot.vert", "shaders/tex_material_map_spot.frag");
+	unsigned int materialMapMultiLightShader = CreateShaderProgram("shaders/tex_material_map_multi_light.vert", "shaders/tex_material_map_multi_light.frag");
+
+
 	//Default draw settings
 	glEnable(GL_DEPTH_TEST);
 
@@ -170,49 +174,48 @@ int main()
 	//lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
 	//Set up light
-	unsigned int light = CreateModelInstance(cube);
+	unsigned int lightCube = CreateModelInstance(cube);
 	vec3 lightPosition(1.2f, 1.0f, 2.0f);
 	vec3 lightColor(0.5f);
 	SetLightDiffuseColor(lightColor);
 	SetLightAmbientColor(vec3(0.2f));
-	SetLightSpecularColor(vec3(1.f, 0.f, 0.f));
+	SetLightSpecularColor(vec3(1.f));
 	SetLightPosition(lightPosition);
 	SetLightDirection(vec3(0.2f, -0.2f, 0.6f));
-	SetModelInstanceShader(light, colorShader);
-	SetModelInstanceColor(light, lightColor);
+	SetLightCutoffInner(glm::cos(glm::radians(15.5f)));
+	SetLightCutoffOuter(glm::cos(glm::radians(25.5f)));
+	SetLightAttenuation(1.f, 0.07f, 0.017f);
+	SetModelInstanceShader(lightCube, colorShader);
+	SetInstanceColor(lightCube, lightColor);
 
-	SetInstancePosition(light, lightPosition);
-	SetInstanceScale(light, vec3(0.2f, 0.2f, 0.2f) * 0.f);
+	SetInstancePosition(lightCube, lightPosition);
+	SetInstanceScale(lightCube, vec3(0.2f, 0.2f, 0.2f));
 
-	/*	lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
-		lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
-		lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-		lightingShader.setFloat("material.shininess", 32.0f);*/
-
-	//Set up cube
-
-
+	//Set up cubes
 	std::vector<unsigned int> cubes;
+	int cubefieldSize = 4;
 
-	for (int x = 0; x < 4; x++)
+	for (int x = 0; x < cubefieldSize; x++)
 	{
-		for (int y = 0; y < 4; y++)
+		for (int y = 0; y < cubefieldSize; y++)
 		{
-			for (int z = 0; z < 4; z++)
+			for (int z = 0; z < cubefieldSize; z++)
 			{
 				unsigned int cubeInstance = CreateModelInstance(cube);
-				SetModelInstanceShader(cubeInstance, materialMapDirectionalShader);
-				SetInstancePosition(cubeInstance, vec3(x, y, z) * 2.f);
+				SetModelInstanceShader(cubeInstance, materialMapPointShader);
+				SetInstancePosition(cubeInstance, (vec3(x, y, z) - (float)cubefieldSize / 2.f) * 2.f);
 				//SetModelInstanceColor(cubeInstance, vec4(1.0f, 1.0f, 1.0f, 1.0f));
 				ModelInstance* p_cubeInstance = GetModelInstance(cubeInstance);
 				p_cubeInstance->ambient = vec3(1.f, 0.5f, 0.31f);
 				//p_cubeInstance->diffuse = vec3(1.f, 0.5f, 0.31f);
-				p_cubeInstance->specular = vec3(0.1f);
-				p_cubeInstance->shininess = 8.f;
+				p_cubeInstance->specular = vec3(0.06f);
+				p_cubeInstance->shininess = 16.f;
 				cubes.push_back(cubeInstance);
 			}
 		}
 	}
+
+	float lightHue = 0.f;
 
 	//Update loop
 	while (!glfwWindowShouldClose(window))
@@ -224,19 +227,29 @@ int main()
 
 		//Update
 		ProcessInput(window, deltaTime);
-		lightPosition = vec3(sin(time) * 1.3f, sin(time * 0.5f), cos(time) * 1.3f);
-		SetInstancePosition(light, lightPosition);
+		lightPosition = vec3(sin(time) * 5.5f, sin(time * 0.5f) * 1.5f, cos(time) * 5.5f);
+		SetInstancePosition(lightCube, lightPosition);
 		SetLightPosition(lightPosition);
-		//vec3 lightColor = glm::rgbColor(vec3(128.f + sin(time / 5.f) * 128.f, 1.f, 1.f));
-		//SetLightColor(lightColor);
-		//SetModelInstanceColor(light, lightColor);
+
+		//Make spotlight follow camera
+		/*lightPosition = GetCameraPosition();
+		SetLightPosition(lightPosition);
+		SetInstanceScale(lightCube, vec3(0.f));
+		SetLightDirection(GetCameraForward());*/
+
+		vec3 lightColor = glm::rgbColor(vec3(lightHue, 0.35f, 1.0f));
+		lightHue = lightHue < 360.f ? lightHue + deltaTime * 20.f : 0.f;
+		SetLightDiffuseColor(lightColor);
+		SetLightAmbientColor(lightColor / 5.f);
+		SetLightSpecularColor(lightColor);
+		SetInstanceColor(lightCube, lightColor);
 
 		//Rotate cubes
 		auto it = cubes.begin();
 
 		while (it != cubes.end())
 		{
-			SetInstanceRotation(*it, vec3(time * 15.f, sin(time * 0.5f) * 90.f, time * 10.f));
+			SetInstanceRotation(*it, vec3(time * 15.f, sin(time * 0.15f) * 90.f, time * 10.f));
 			it++;
 		}
 		

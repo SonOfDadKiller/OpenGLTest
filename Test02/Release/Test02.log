@@ -1,0 +1,32 @@
+﻿  Main.cpp
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(84,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(85,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(89,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(90,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(91,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(92,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(183,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Model.cpp
+Main.obj : error LNK2001: unresolved external symbol _glfwSwapBuffers
+Main.obj : error LNK2001: unresolved external symbol _glfwSetFramebufferSizeCallback
+Main.obj : error LNK2001: unresolved external symbol _glfwGetTime
+Main.obj : error LNK2001: unresolved external symbol _glfwGetKey
+Main.obj : error LNK2001: unresolved external symbol _glfwTerminate
+Main.obj : error LNK2001: unresolved external symbol _glfwPollEvents
+Main.obj : error LNK2001: unresolved external symbol _glfwInit
+Main.obj : error LNK2001: unresolved external symbol _glfwSetWindowShouldClose
+Main.obj : error LNK2001: unresolved external symbol _glfwSetScrollCallback
+Main.obj : error LNK2001: unresolved external symbol _glfwCreateWindow
+Main.obj : error LNK2001: unresolved external symbol _glfwWindowHint
+Main.obj : error LNK2001: unresolved external symbol _glfwSetInputMode
+Main.obj : error LNK2001: unresolved external symbol _glfwMakeContextCurrent
+Main.obj : error LNK2001: unresolved external symbol _glfwGetProcAddress
+Main.obj : error LNK2001: unresolved external symbol _glfwSetCursorPosCallback
+Main.obj : error LNK2001: unresolved external symbol _glfwWindowShouldClose
+Model.obj : error LNK2001: unresolved external symbol _aiGetMaterialTextureCount
+Model.obj : error LNK2001: unresolved external symbol "public: char const * __thiscall Assimp::Importer::GetErrorString(void)const " (?GetErrorString@Importer@Assimp@@QBEPBDXZ)
+Model.obj : error LNK2001: unresolved external symbol "public: struct aiScene const * __thiscall Assimp::Importer::ReadFile(char const *,unsigned int)" (?ReadFile@Importer@Assimp@@QAEPBUaiScene@@PBDI@Z)
+Model.obj : error LNK2001: unresolved external symbol "public: __thiscall Assimp::Importer::~Importer(void)" (??1Importer@Assimp@@QAE@XZ)
+Model.obj : error LNK2001: unresolved external symbol "public: __thiscall Assimp::Importer::Importer(void)" (??0Importer@Assimp@@QAE@XZ)
+Model.obj : error LNK2001: unresolved external symbol _aiGetMaterialTexture
+C:\Projects\OpenGLTest\Release\Test02.exe : fatal error LNK1120: 22 unresolved externals

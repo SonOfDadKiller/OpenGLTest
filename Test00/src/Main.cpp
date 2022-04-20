@@ -426,11 +426,11 @@ int main()
 
 
 	//Init shaders
-	unsigned int basicVertShader = CreateShader(Vertex, "shaders/basic.vertShader");
-	unsigned int colorVertShader = CreateShader(Vertex, "shaders/color.vertShader");
-	unsigned int textureVertShader = CreateShader(Vertex, "shaders/texture.vertShader");
-	unsigned int basicFragShader = CreateShader(Fragment, "shaders/basic.fragShader");
-	unsigned int textureFragShader = CreateShader(Fragment, "shaders/texture.fragShader");
+	unsigned int basicVertShader = CreateShader(VertShader, "shaders/basic.vertShader");
+	unsigned int colorVertShader = CreateShader(VertShader, "shaders/color.vertShader");
+	unsigned int textureVertShader = CreateShader(VertShader, "shaders/texture.vertShader");
+	unsigned int basicFragShader = CreateShader(FragShader, "shaders/basic.fragShader");
+	unsigned int textureFragShader = CreateShader(FragShader, "shaders/texture.fragShader");
 	unsigned int orangeShader = CreateShaderProgram(basicVertShader, basicFragShader);
 	unsigned int colorShader = CreateShaderProgram(colorVertShader, basicFragShader);
 	unsigned int textureShader = CreateShaderProgram(textureVertShader, textureFragShader);

@@ -62,7 +62,7 @@ unsigned int CreateShader(ShaderType type, const char* filePath)
 
 	const char* source = data.c_str();
 
-	unsigned int id = glCreateShader(type == Vertex ? GL_VERTEX_SHADER : GL_FRAGMENT_SHADER);
+	unsigned int id = glCreateShader(type == VertShader ? GL_VERTEX_SHADER : GL_FRAGMENT_SHADER);
 	glShaderSource(id, 1, &source, nullptr);
 	glCompileShader(id);
 
@@ -71,11 +71,11 @@ unsigned int CreateShader(ShaderType type, const char* filePath)
 	{
 		char infoLog[512];
 		glGetShaderInfoLog(id, 512, nullptr, infoLog);
-		std::cout << (type == Vertex ? "Vertex" : "Fragment") << "Shader compilation failed! LOG: " << infoLog << "\n";
+		std::cout << (type == VertShader ? "Vertex" : "Fragment") << "Shader compilation failed! LOG: " << infoLog << "\n";
 		return -1;
 	}
 
-	if (type == Vertex)
+	if (type == VertShader)
 	{
 		vertShaders.push_back(id);
 		std::cout << "Created Vertex Shader: " << id << "\n";

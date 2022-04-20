@@ -97,8 +97,8 @@ void InitializeMap()
 	InitializeTileVAO(cubeVBO, deadEndTileVAO, deadEndTileIndices, sizeof(deadEndTileIndices));
 
 	//Load shaders and compile program
-	unsigned int vert = CreateShader(Vertex, "shaders/tile.vert");
-	unsigned int frag = CreateShader(Fragment, "shaders/tile.frag");
+	unsigned int vert = CreateShader(VertShader, "shaders/tile.vert");
+	unsigned int frag = CreateShader(FragShader, "shaders/tile.frag");
 	tileShader = CreateShaderProgram(vert, frag);
 	modelMatrixUniform = glGetUniformLocation(tileShader, "model");
 	viewMatrixUniform = glGetUniformLocation(tileShader, "view");

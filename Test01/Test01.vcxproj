@@ -28,13 +28,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -178,6 +178,12 @@
     <None Include="shaders\tex_material_map.vert" />
     <None Include="shaders\tex_material_map_directional.frag" />
     <None Include="shaders\tex_material_map_directional.vert" />
+    <None Include="shaders\tex_material_map_multi_light.frag" />
+    <None Include="shaders\tex_material_map_multi_light.vert" />
+    <None Include="shaders\tex_material_map_point.frag" />
+    <None Include="shaders\tex_material_map_point.vert" />
+    <None Include="shaders\tex_material_map_spot.frag" />
+    <None Include="shaders\tex_material_map_spot.vert" />
     <None Include="shaders\tex_phong.frag" />
     <None Include="shaders\tex_phong.vert" />
   </ItemGroup>

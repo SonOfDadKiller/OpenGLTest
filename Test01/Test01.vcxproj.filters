@@ -94,5 +94,23 @@
     <None Include="shaders\tex_material_map_directional.frag">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="shaders\tex_material_map_point.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map_point.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map_spot.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map_spot.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map_multi_light.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\tex_material_map_multi_light.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

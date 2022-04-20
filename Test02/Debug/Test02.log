@@ -1,0 +1,36 @@
+﻿  Main.cpp
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(84,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(85,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(89,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(90,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(91,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(92,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Projects\OpenGLTest\Test02\src\Main.cpp(183,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Model.cpp
+  Shader.cpp
+  Generating Code...
+Main.obj : error LNK2019: unresolved external symbol _glfwInit referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwTerminate referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwWindowHint referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwCreateWindow referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwWindowShouldClose referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwSetWindowShouldClose referenced in function "void __cdecl ProcessInput(struct GLFWwindow *,float)" (?ProcessInput@@YAXPAUGLFWwindow@@M@Z)
+Main.obj : error LNK2019: unresolved external symbol _glfwSetFramebufferSizeCallback referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwPollEvents referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwSetInputMode referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwGetKey referenced in function "void __cdecl ProcessInput(struct GLFWwindow *,float)" (?ProcessInput@@YAXPAUGLFWwindow@@M@Z)
+Main.obj : error LNK2019: unresolved external symbol _glfwSetCursorPosCallback referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwSetScrollCallback referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwGetTime referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwMakeContextCurrent referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwSwapBuffers referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol _glfwGetProcAddress referenced in function _main
+Model.obj : error LNK2019: unresolved external symbol "public: __thiscall Assimp::Importer::Importer(void)" (??0Importer@Assimp@@QAE@XZ) referenced in function "private: void __thiscall Model::LoadModel(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?LoadModel@Model@@AAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Model.obj : error LNK2019: unresolved external symbol "public: __thiscall Assimp::Importer::~Importer(void)" (??1Importer@Assimp@@QAE@XZ) referenced in function "private: void __thiscall Model::LoadModel(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?LoadModel@Model@@AAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Model.obj : error LNK2019: unresolved external symbol "public: struct aiScene const * __thiscall Assimp::Importer::ReadFile(char const *,unsigned int)" (?ReadFile@Importer@Assimp@@QAEPBUaiScene@@PBDI@Z) referenced in function "public: struct aiScene const * __thiscall Assimp::Importer::ReadFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,unsigned int)" (?ReadFile@Importer@Assimp@@QAEPBUaiScene@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@Z)
+Model.obj : error LNK2019: unresolved external symbol "public: char const * __thiscall Assimp::Importer::GetErrorString(void)const " (?GetErrorString@Importer@Assimp@@QBEPBDXZ) referenced in function "private: void __thiscall Model::LoadModel(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?LoadModel@Model@@AAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+Model.obj : error LNK2019: unresolved external symbol _aiGetMaterialTextureCount referenced in function "public: unsigned int __thiscall aiMaterial::GetTextureCount(enum aiTextureType)const " (?GetTextureCount@aiMaterial@@QBEIW4aiTextureType@@@Z)
+Model.obj : error LNK2019: unresolved external symbol _aiGetMaterialTexture referenced in function "public: enum aiReturn __thiscall aiMaterial::GetTexture(enum aiTextureType,unsigned int,struct aiString *,enum aiTextureMapping *,unsigned int *,float *,enum aiTextureOp *,enum aiTextureMapMode *)const " (?GetTexture@aiMaterial@@QBE?AW4aiReturn@@W4aiTextureType@@IPAUaiString@@PAW4aiTextureMapping@@PAIPAMPAW4aiTextureOp@@PAW4aiTextureMapMode@@@Z)
+C:\Projects\OpenGLTest\3rdParty\lib\assimp-vc143-mtd.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Projects\OpenGLTest\3rdParty\lib\glfw3.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Projects\OpenGLTest\Debug\Test02.exe : fatal error LNK1120: 22 unresolved externals

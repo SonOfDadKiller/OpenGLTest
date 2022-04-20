@@ -20,6 +20,9 @@ static vec3 lightDiffuse;
 static vec3 lightSpecular;
 static vec3 lightPosition;
 static vec3 lightDirection;
+static vec3 lightAttenuation;
+static float lightCutoff;
+static float lightCutoffInner;
 
 unsigned int CreateModel(float vertices[], int vertCount, unsigned int indices[], unsigned int indexCount, const char* texturePath, const char* specMapPath)
 {
@@ -119,6 +122,12 @@ void SetModelInstanceShader(unsigned int modelInstanceIndex, unsigned int shader
 	instances[modelInstanceIndex].lightSpecularUniform = glGetUniformLocation(shaderProgramID, "light.specular");
 
 	instances[modelInstanceIndex].lightDirectionUniform = glGetUniformLocation(shaderProgramID, "light.direction");
+	instances[modelInstanceIndex].lightCutoffUniform = glGetUniformLocation(shaderProgramID, "light.cutoff");
+	instances[modelInstanceIndex].lightCutoffInnerUniform = glGetUniformLocation(shaderProgramID, "light.cutoffInner");
+
+	instances[modelInstanceIndex].lightAttenConstantUniform = glGetUniformLocation(shaderProgramID, "light.attenConstant");
+	instances[modelInstanceIndex].lightAttenLinearUniform = glGetUniformLocation(shaderProgramID, "light.attenLinear");
+	instances[modelInstanceIndex].lightAttenQuadraticUniform = glGetUniformLocation(shaderProgramID, "light.attenQuadratic");
 }
 
 void RecalculateTransform(ModelInstance* instance)
@@ -166,7 +175,7 @@ glm::vec3 GetInstanceScale(unsigned int modelInstanceIndex)
 	return GetModelInstance(modelInstanceIndex)->scale;
 }
 
-void SetModelInstanceColor(unsigned int modelInstanceIndex, vec3 color)
+void SetInstanceColor(unsigned int modelInstanceIndex, vec3 color)
 {
 	instances[modelInstanceIndex].color = color;
 }
@@ -196,6 +205,21 @@ void SetLightDirection(vec3 direction)
 	lightDirection = direction;
 }
 
+void SetLightAttenuation(float constant, float linear, float quadratic)
+{
+	lightAttenuation = vec3(constant, linear, quadratic);
+}
+
+void SetLightCutoffOuter(float angle)
+{
+	lightCutoff = angle;
+}
+
+void SetLightCutoffInner(float angle)
+{
+	lightCutoffInner = angle;
+}
+
 void DrawModelInstances()
 {
 	float time = glfwGetTime();
@@ -222,6 +246,16 @@ void DrawModelInstances()
 		if (it->lightDirectionUniform != -1)
 		{
 			glUniform3f(it->lightDirectionUniform, lightDirection.x, lightDirection.y, lightDirection.z);
+		}
+
+		if (it->lightCutoffUniform != -1)
+		{
+			glUniform1f(it->lightCutoffUniform, lightCutoff);
+		}
+
+		if (it->lightCutoffInnerUniform != -1)
+		{
+			glUniform1f(it->lightCutoffInnerUniform, lightCutoffInner);
 		}
 
 		if (it->viewPositionUniform != -1)
@@ -294,6 +328,21 @@ void DrawModelInstances()
 		if (it->lightSpecularUniform != -1)
 		{
 			glUniform3f(it->lightSpecularUniform, lightSpecular.x, lightSpecular.y, lightSpecular.z);
+		}
+
+		if (it->lightAttenConstantUniform != -1)
+		{
+			glUniform1f(it->lightAttenConstantUniform, lightAttenuation.x);
+		}
+
+		if (it->lightAttenLinearUniform != -1)
+		{
+			glUniform1f(it->lightAttenLinearUniform, lightAttenuation.y);
+		}
+
+		if (it->lightAttenQuadraticUniform != -1)
+		{
+			glUniform1f(it->lightAttenQuadraticUniform, lightAttenuation.z);
 		}
 		
 		//glActiveTexture(GL_TEXTURE0);
